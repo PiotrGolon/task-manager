@@ -3,7 +3,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FcGoogle } from "react-icons/fc";
-import { FaSquareFacebook } from "react-icons/fa6";
+import { FaSquareGithub } from "react-icons/fa6";
 import Link from "next/link";
 
 import { DottedSeparator } from "@/components/dotted-seprarator";
@@ -20,6 +20,7 @@ import {
 
 import { loginSchema } from "../schemas";
 import { useLogin } from "../api/use-login";
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 
 export const SignInCard = () => {
   const { mutate, isPending } = useLogin();
@@ -92,6 +93,7 @@ export const SignInCard = () => {
       </div>
       <CardContent className="p-7 flex flex-col gap-y-4">
         <Button
+          onClick={() => signUpWithGoogle()}
           variant={"secondary"}
           size={"lg"}
           disabled={false}
@@ -101,16 +103,17 @@ export const SignInCard = () => {
           Login with Google
         </Button>
         <Button
+          onClick={() => signUpWithGithub()}
           variant={"secondary"}
           size={"lg"}
           disabled={false}
           className="w-full"
         >
-          <FaSquareFacebook
+          <FaSquareGithub
             className="rounded-lg"
             style={{ width: "20px", height: "20px" }}
           />
-          Login with Facebook
+          Login with Github
         </Button>
       </CardContent>
       <div className="px-7">
